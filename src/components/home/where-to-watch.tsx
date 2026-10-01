@@ -11,6 +11,9 @@ export function WhereToWatch() {
       <h2 id="where-to-watch" className="text-center text-4xl text-white sm:text-5xl">
         Where do you watch?
       </h2>
+      <p className="mt-3 text-center font-heading text-xl font-bold text-white sm:text-2xl">
+        Find us <span className="text-gold">{site.handle}</span>
+      </p>
       <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {socials.map((social) => (
           <li
@@ -21,7 +24,7 @@ export function WhereToWatch() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${social.name}${social.primary ? ", main channel" : ""}. ${social.description}. Opens in a new tab.`}
+              aria-label={`${social.name}${social.primary ? ", main channel" : ""}, ${site.handle}. ${social.description}. Opens in a new tab.`}
               className={`flex h-full min-h-44 flex-col justify-between rounded-[2rem] p-6 focus-visible:outline-white sm:min-h-48 ${
                 social.primary ? "min-h-64 sm:min-h-72" : ""
               } ${platformClassName[social.name] ?? "bg-sky text-navy"}`}

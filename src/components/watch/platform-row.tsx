@@ -14,7 +14,7 @@ export function PlatformRow() {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${social.name}. ${social.description}. Opens in a new tab.`}
+            aria-label={`${social.name}, ${site.handle}. ${social.description}. Opens in a new tab.`}
             className={`flex h-full min-w-0 flex-col justify-between rounded-[2rem] p-5 focus-visible:outline-white ${
               social.primary ? "min-h-32 sm:min-h-40" : "min-h-24"
             } ${platformClassName[social.name] ?? "bg-sky text-navy"}`}

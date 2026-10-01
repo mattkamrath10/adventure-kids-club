@@ -96,7 +96,7 @@ export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
 
         <div className="mt-12 text-center">
           <p className="font-heading text-3xl text-white sm:text-4xl">
-            See more pictures on Instagram and Pinterest!
+            See more pictures on Instagram and Pinterest at {site.handle}!
           </p>
           <ul className="mt-6 flex flex-wrap justify-center gap-3">
             {more.map((social) => (
@@ -105,7 +105,7 @@ export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${social.name}. ${social.description}. Opens in a new tab.`}
+                  aria-label={`${social.name}, ${site.handle}. ${social.description}. Opens in a new tab.`}
                   className={`inline-flex min-h-14 items-center gap-3 rounded-full px-6 font-heading text-xl focus-visible:outline-white ${
                     platformClassName[social.name] ?? "bg-white text-navy"
                   }`}

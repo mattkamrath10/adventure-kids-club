@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -37,7 +36,7 @@ function SubscribeLink({ className = "" }: { className?: string }) {
       href={youtubeHref()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Subscribe on YouTube (opens in a new tab)"
+      aria-label={`Subscribe to ${site.handle} on YouTube (opens in a new tab)`}
       className={`min-h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-[#FF0000] px-6 font-heading text-xl font-bold text-white hover:brightness-110 focus-visible:outline-white ${className}`}
     >
       <YouTubeIcon className="size-7" />
@@ -46,34 +45,26 @@ function SubscribeLink({ className = "" }: { className?: string }) {
   );
 }
 
-function Logo({ hasLogo }: { hasLogo: boolean }) {
-  const [logoOk, setLogoOk] = useState(hasLogo);
-
+function Wordmark() {
   return (
     <Link
       href="/"
-      className="inline-flex min-h-12 max-w-[calc(100%-4.5rem)] items-center lg:max-w-[34rem]"
+      aria-label={`${site.brand}. ${site.show}`}
+      className="inline-flex min-h-12 max-w-[calc(100%-4.5rem)] items-center lg:max-w-xl"
     >
-      {logoOk ? (
-        <Image
-          src="/images/logo.png"
-          alt={site.name}
-          width={280}
-          height={96}
-          priority
-          className="h-14 w-auto max-w-full sm:h-16"
-          onError={() => setLogoOk(false)}
-        />
-      ) : (
-        <span className="text-balance font-heading text-2xl font-bold leading-tight text-gold sm:text-3xl">
-          {site.name}
+      <span className="flex min-w-0 flex-col gap-1">
+        <span className="font-heading text-xl font-bold leading-none text-white sm:text-3xl">
+          Adventure<span className="inline-block px-[0.04em] text-[1.6em] leading-none text-gold">8</span> Kids Club
         </span>
-      )}
+        <span className="text-balance font-heading text-lg font-bold leading-tight text-sky">
+          {site.show}
+        </span>
+      </span>
     </Link>
   );
 }
 
-export function HeaderClient({ hasLogo }: { hasLogo: boolean }) {
+export function HeaderClient() {
   const pathname = usePathname();
   const menuId = useId();
   const [open, setOpen] = useState(false);
@@ -139,7 +130,7 @@ export function HeaderClient({ hasLogo }: { hasLogo: boolean }) {
     <>
       <header className="sticky top-0 z-40 border-b border-white/20 bg-navy/90 backdrop-blur-md supports-[backdrop-filter]:bg-navy/75">
         <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-3">
-          <Logo hasLogo={hasLogo} />
+          <Wordmark />
           <div className="ml-auto flex items-center gap-3">
             <SubscribeLink className="hidden lg:inline-flex" />
             <button

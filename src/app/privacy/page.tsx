@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site } from "@/data/site";
 import { starterMetadata } from "@/lib/metadata";
 
 export const metadata = starterMetadata("Privacy Policy", "/privacy");
@@ -22,7 +23,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-3xl text-gold sm:text-4xl">This site is for families</h2>
           <p className="mt-3">
-            Tweedles and the Adventure Kids Club is a show for young kids. This website is a place
+            {site.show} is a show for young kids. This website is a place
             to meet the characters, watch episodes, and look at pictures. Parents and guardians are
             the people who sign up and write to us.
           </p>
@@ -78,7 +79,7 @@ export default function PrivacyPage() {
           </p>
           <p className="mt-3">
             Buttons for YouTube, Facebook, Instagram, X, and Pinterest open those sites in a new
-            tab. Those sites have their own privacy rules.
+            tab. Look for {site.handle}. Those sites have their own privacy rules.
           </p>
         </section>
 

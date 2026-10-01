@@ -7,6 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Slide } from "@/data/slides";
+import { site } from "@/data/site";
 
 export function HeroSlideshow({ slides }: { slides: Slide[] }) {
   const autoplay = useRef(
@@ -68,7 +69,7 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
       aria-label="Featured adventures"
       className="relative h-[80svh] w-full"
     >
-      <h1 className="sr-only">Tweedles and the Adventure Kids Club</h1>
+      <h1 className="sr-only">{site.show}</h1>
       <div className="h-full overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {slides.map((slide, index) => (

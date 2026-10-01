@@ -7,7 +7,10 @@ export type SocialLink = {
 };
 
 export const site = {
-  name: "Tweedles and the Adventure Kids Club",
+  brand: "Adventure8 Kids Club",
+  show: "Tweedles and the Adventure Kids Club",
+  name: "Adventure8 Kids Club | Tweedles and the Adventure Kids Club",
+  handle: "@Adventure8kidsclub",
   tagline:
     "Blast off on big adventures with Max, Blaze, Pip, Luna and the Tweedles!",
   url: "https://adventure8kidsclub.com",

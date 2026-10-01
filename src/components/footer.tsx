@@ -20,7 +20,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${social.name} (opens in a new tab)`}
+                    aria-label={`${social.name}, ${site.handle} (opens in a new tab)`}
                     className={`inline-flex size-14 items-center justify-center rounded-full hover:brightness-110 ${
                       platformClassName[social.name] ?? "bg-sky text-navy"
                     }`}
@@ -30,6 +30,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 font-heading text-xl text-white">
+              Find us <span className="text-gold">{site.handle}</span>
+            </p>
           </nav>
 
           <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-3">
@@ -46,7 +49,7 @@ export function Footer() {
 
           <div className="space-y-2">
             <p className="font-heading text-xl">
-              © {year} {site.name}
+              © {year} {site.brand}
             </p>
             <p>{site.footerNote}</p>
           </div>

@@ -52,7 +52,7 @@ Edit `src/data/slides.ts`. Each slide has a headline, a short line, button text,
 
 Edit `src/data/site.ts`. Replace each placeholder `href` with the real YouTube, Facebook, Instagram, X, and Pinterest address. YouTube is the main channel (`primary: true`).
 
-The header logo is `public/images/logo.png`. The share image is `public/images/og.png` (1200×630). Until the logo file is there, the header shows the show name. Favicon and home-screen icons are drawn from `public/images/logo.png` when you add that file.
+The header shows Adventure8 Kids Club, with the show name underneath. The share image is `public/images/og.png` (1200×630). Favicon and home-screen icons are drawn from `public/images/logo.png` when you add that file. The social handle is `@Adventure8kidsclub`.
 
 ## Environment variables
 
