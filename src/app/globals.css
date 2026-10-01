@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Unsuffixed utilities (bg-gold, text-pink) are the show colors. */
+  --color-navy: #1b1464;
+  --color-gold: #ffc93c;
+  --color-lime: #a3e635;
+  --color-purple: #a855f7;
+  --color-pink: #ff3ea5;
+  --color-sky: #38bdf8;
+  --color-orange: #ff8a00;
+  --color-background: #1b1464;
+  --color-foreground: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fredoka), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  min-height: 100%;
+  background-color: var(--color-navy);
+  color-scheme: dark;
+}
+
+html::before,
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+html::before {
+  background-image:
+    radial-gradient(circle at 12% 16%, #fff 0 2px, transparent 5px),
+    radial-gradient(circle at 78% 10%, #fff 0 1.5px, transparent 4px),
+    radial-gradient(circle at 64% 30%, rgb(255 255 255 / 0.9) 0 2px, transparent 5px),
+    radial-gradient(circle at 24% 44%, rgb(255 255 255 / 0.75) 0 1.5px, transparent 4px),
+    radial-gradient(circle at 90% 48%, #fff 0 2.5px, transparent 6px),
+    radial-gradient(circle at 42% 70%, rgb(255 255 255 / 0.9) 0 2px, transparent 5px),
+    radial-gradient(circle at 8% 82%, rgb(255 255 255 / 0.8) 0 1.5px, transparent 4px),
+    radial-gradient(circle at 58% 90%, #fff 0 2px, transparent 5px);
+  animation: twinkle 4.8s ease-in-out infinite;
+}
+
+html::after {
+  background-image:
+    radial-gradient(circle at 34% 12%, rgb(255 201 60 / 0.95) 0 2px, transparent 5px),
+    radial-gradient(circle at 94% 32%, rgb(255 255 255 / 0.85) 0 1.5px, transparent 4px),
+    radial-gradient(circle at 50% 38%, #fff 0 2.5px, transparent 6px),
+    radial-gradient(circle at 18% 64%, rgb(56 189 248 / 0.95) 0 2px, transparent 5px),
+    radial-gradient(circle at 74% 66%, rgb(255 255 255 / 0.8) 0 1.5px, transparent 4px),
+    radial-gradient(circle at 30% 92%, rgb(255 255 255 / 0.9) 0 2px, transparent 5px);
+  animation: twinkle 6.4s ease-in-out infinite;
+  animation-delay: -2.2s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  html::after {
+    animation: none;
+    opacity: 0.85;
+  }
+
+  .confetti-piece,
+  .play-float {
+    animation: none;
+  }
+}
+
+.hero-text-shadow {
+  text-shadow:
+    0 2px 0 rgb(0 0 0 / 0.35),
+    0 10px 28px rgb(0 0 0 / 0.55);
+}
+
+@keyframes crew-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-12px);
+  }
+
+  70% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:hover .crew-portrait,
+  a:focus-visible .crew-portrait {
+    animation: crew-bounce 0.7s ease-in-out;
+  }
+
+  .gallery-card {
+    transition: transform 0.35s ease;
+  }
+
+  .gallery-card .gallery-zoom {
+    transition: transform 0.45s ease;
+  }
+
+  .gallery-card:hover,
+  .gallery-card:focus-visible {
+    transform: rotate(-2deg);
+  }
+
+  .gallery-card-alt:hover,
+  .gallery-card-alt:focus-visible {
+    transform: rotate(2deg);
+  }
+
+  .gallery-card:hover .gallery-zoom,
+  .gallery-card:focus-visible .gallery-zoom {
+    transform: scale(1.08);
+  }
+
+  .confetti-piece {
+    animation:
+      confetti-fall 2.8s linear forwards,
+      confetti-spin 2.8s linear forwards;
+  }
+
+  button:not(.inset-0):hover,
+  button:not(.inset-0):focus-visible,
+  a:hover,
+  a:focus-visible {
+    animation: button-wiggle 0.5s ease-in-out;
+  }
+
+  .gallery-card:hover,
+  .gallery-card:focus-visible {
+    animation: none;
+  }
+
+  .play-float {
+    animation: card-float 5.5s ease-in-out infinite;
+  }
+
+  li.play-float:nth-child(2n) {
+    animation-delay: -1.6s;
+  }
+
+  li.play-float:nth-child(3n) {
+    animation-delay: -2.8s;
+  }
+}
+
+@keyframes button-wiggle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  25% {
+    rotate: -3deg;
+  }
+
+  55% {
+    rotate: 2.5deg;
+  }
+
+  80% {
+    rotate: -1.5deg;
+  }
+}
+
+@keyframes card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -12%;
+}
+
+@keyframes confetti-fall {
+  to {
+    top: 108%;
+  }
+}
+
+@keyframes confetti-spin {
+  to {
+    transform: rotate(540deg);
+  }
+}
+
+@layer base {
+  body {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    background: transparent;
+    color: var(--color-foreground);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
 }

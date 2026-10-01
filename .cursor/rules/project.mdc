@@ -1,0 +1,54 @@
+---
+description: Visual, content, and safety rules for the Tweedles kids' show site
+alwaysApply: true
+---
+
+# Tweedles and the Adventure Kids Club
+
+Promotional site for parents and kids (about ages 3–8). Big, bright, bold, playful space-adventure look: huge images, rounded corners, chunky buttons, lots of color.
+
+## Type and color
+
+- Headings use Fredoka (`font-heading`). Body uses Nunito (`font-sans`). Both come from `next/font/google` in `src/app/layout.tsx`.
+- Brand colors are the unsuffixed Tailwind utilities. Do not substitute the numbered palette (`bg-sky-400`) for these:
+  - `navy` `#1B1464` — dark background
+  - `gold` `#FFC93C` — Max
+  - `lime` `#A3E635` — Blaze
+  - `purple` `#A855F7` — Pip
+  - `pink` `#FF3EA5` — Luna
+  - `sky` `#38BDF8` — Tweedles
+  - `orange` `#FF8A00` — Ember
+- White text on dark areas.
+- Mobile first. The phone layout must look great.
+- Body text is at least 18px on mobile.
+- Tap targets are at least 48px (`min-h-12`). Kids use phones and tablets.
+
+```tsx
+<a className="inline-flex min-h-12 items-center rounded-full bg-gold px-6 text-lg font-heading text-navy">
+  Blast off
+</a>
+```
+
+## Accessibility
+
+- Alt text on every image.
+- Keep contrast strong: white or navy on the brand colors.
+- Keyboard navigation: visible focus, logical order, real buttons and links.
+- Respect `prefers-reduced-motion`. The starfield twinkle is paused there. New motion must pause or stop the same way.
+
+## Kid-safe
+
+- No ads, no trackers, no third-party cookies.
+- YouTube embeds use `youtube-nocookie.com`.
+
+```tsx
+<iframe
+  src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+  title="Episode title"
+/>
+```
+
+## Content and hosting
+
+- Editable content (characters, videos, social links, gallery list) lives in `src/data/`. Change copy there, not inside components.
+- Static export stays on: `output: "export"` and `images.unoptimized: true` in `next.config.ts`, so the site can be hosted anywhere.
