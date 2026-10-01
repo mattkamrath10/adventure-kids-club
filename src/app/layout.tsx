@@ -19,34 +19,42 @@ const nunito = Nunito({
   display: "swap",
 });
 
-const shareImage = {
-  url: "/images/og.png",
-  width: 1200,
-  height: 630,
-  alt: site.name,
-} as const;
-
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL("https://www.adventure8kidsclub.com"),
   title: {
     default: site.name,
     template: `%s · ${site.name}`,
   },
   description: site.tagline,
-  applicationName: site.name,
+  applicationName: site.brand,
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: site.name,
+    url: "https://www.adventure8kidsclub.com",
+    siteName: site.brand,
     title: site.name,
     description: site.tagline,
-    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.tagline,
-    images: [shareImage.url],
+  },
+  icons: {
+    icon: [
+      {
+        url: "https://www.adventure8kidsclub.com/icon.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "https://www.adventure8kidsclub.com/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
 };
 
