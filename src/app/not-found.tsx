@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { EditableImage } from "@/components/owner/image-overrides";
 import { characters } from "@/data/characters";
 import { inkClass } from "@/lib/contrast";
 import { characterPhoto } from "@/lib/public-images";
@@ -11,18 +12,24 @@ export default function NotFound() {
   return (
     <div className="flex flex-1 flex-col items-center px-4 py-16 text-center sm:py-24">
       <span
-        className={`play-float relative flex size-44 items-center justify-center overflow-hidden rounded-full ring-8 ring-white sm:size-56 ${
+        className={`play-float relative flex size-44 items-center justify-center rounded-full ring-8 ring-white sm:size-56 ${
           cj ? inkClass(cj.color) : "text-navy"
         }`}
         style={{ backgroundColor: cj?.color ?? "#38BDF8" }}
       >
-        {photo ? (
-          <Image src={photo} alt={cj?.look ?? "CJ"} fill sizes="224px" className="object-cover" />
-        ) : (
-          <span aria-hidden="true" className="font-heading text-7xl sm:text-8xl">
-            C
-          </span>
-        )}
+        <EditableImage
+          slotKey={cj?.image ?? "/images/characters/cj.png"}
+          alt={cj?.look ?? "CJ"}
+          clipClassName="rounded-full"
+        >
+          {photo ? (
+            <Image src={photo} alt={cj?.look ?? "CJ"} fill sizes="224px" className="object-cover" />
+          ) : (
+            <span aria-hidden="true" className="font-heading text-7xl sm:text-8xl">
+              C
+            </span>
+          )}
+        </EditableImage>
       </span>
       <p className="mt-6 font-heading text-2xl text-sky">CJ</p>
       <h1 className="mt-3 max-w-3xl text-balance text-4xl text-gold sm:text-6xl">

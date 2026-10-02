@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Star, X } from "lucide-react";
+import { EditableImage } from "@/components/owner/image-overrides";
 import { characterGroups, type Character } from "@/data/characters";
 import { inkClass, navyBodyOn } from "@/lib/contrast";
 
@@ -130,17 +131,23 @@ function CharacterModal({ character, onClose }: { character: CrewMember; onClose
           </button>
         </div>
         <div className="relative mx-4 flex min-h-[70vh] items-center justify-center">
-          {character.photo ? (
-            <Image
-              src={character.photo}
-              alt={`${character.name}, ${character.look}`}
-              fill
-              sizes="(min-width: 896px) 896px, 100vw"
-              className="object-contain"
-            />
-          ) : (
-            <LetterBadge character={character} className="size-72 text-8xl sm:size-[28rem] sm:text-9xl" />
-          )}
+          <EditableImage
+            slotKey={character.image}
+            alt={`${character.name}, ${character.look}`}
+            fit="contain"
+          >
+            {character.photo ? (
+              <Image
+                src={character.photo}
+                alt={`${character.name}, ${character.look}`}
+                fill
+                sizes="(min-width: 896px) 896px, 100vw"
+                className="object-contain"
+              />
+            ) : (
+              <LetterBadge character={character} className="size-72 text-8xl sm:size-[28rem] sm:text-9xl" />
+            )}
+          </EditableImage>
         </div>
         <h2 id={titleId} className={`px-6 text-center text-5xl sm:text-7xl ${inkClass(character.color)}`}>
           {character.name}
@@ -185,17 +192,23 @@ function CharacterCard({
         style={{ backgroundColor: character.color }}
       >
         <div className="relative flex min-h-80 w-full items-center justify-center md:min-h-[400px] md:w-1/2">
-          {character.photo ? (
-            <Image
-              src={character.photo}
-              alt={`${character.name}, ${character.look}`}
-              fill
-              sizes="(min-width: 768px) 36rem, 100vw"
-              className="object-contain p-4"
-            />
-          ) : (
-            <LetterBadge character={character} className="size-48 text-7xl md:size-64 md:text-8xl" />
-          )}
+          <EditableImage
+            slotKey={character.image}
+            alt={`${character.name}, ${character.look}`}
+            fit="contain"
+          >
+            {character.photo ? (
+              <Image
+                src={character.photo}
+                alt={`${character.name}, ${character.look}`}
+                fill
+                sizes="(min-width: 768px) 36rem, 100vw"
+                className="object-contain p-4"
+              />
+            ) : (
+              <LetterBadge character={character} className="size-48 text-7xl md:size-64 md:text-8xl" />
+            )}
+          </EditableImage>
         </div>
         <div className={`flex w-full flex-col justify-center p-6 sm:p-8 md:w-1/2 md:p-10 ${ink}`}>
           <h3 className="text-5xl sm:text-6xl">{character.name}</h3>

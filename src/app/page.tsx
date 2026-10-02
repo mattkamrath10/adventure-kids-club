@@ -15,9 +15,10 @@ function heroSlides() {
   const gallery = galleryImagePaths();
 
   return slides.map((slide, index) => {
-    if (slide.image && publicFileExists(slide.image)) return slide;
+    const slotKey = slide.image ?? `slides/${index + 1}`;
+    if (slide.image && publicFileExists(slide.image)) return { ...slide, slotKey };
     const fromGallery = gallery[index];
-    return { ...slide, image: fromGallery };
+    return { ...slide, image: fromGallery, slotKey };
   });
 }
 

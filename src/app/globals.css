@@ -118,17 +118,20 @@ html::after {
   }
 
   .gallery-card:hover,
-  .gallery-card:focus-visible {
+  .gallery-card:focus-visible,
+  .gallery-card:has(:focus-visible) {
     transform: rotate(-2deg);
   }
 
   .gallery-card-alt:hover,
-  .gallery-card-alt:focus-visible {
+  .gallery-card-alt:focus-visible,
+  .gallery-card-alt:has(:focus-visible) {
     transform: rotate(2deg);
   }
 
   .gallery-card:hover .gallery-zoom,
-  .gallery-card:focus-visible .gallery-zoom {
+  .gallery-card:focus-visible .gallery-zoom,
+  .gallery-card:has(:focus-visible) .gallery-zoom {
     transform: scale(1.08);
   }
 

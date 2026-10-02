@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { EditableImage } from "@/components/owner/image-overrides";
 import { navLinks } from "@/data/nav";
 import { site } from "@/data/site";
 import { YouTubeIcon } from "./social-icons";
@@ -45,26 +46,32 @@ function SubscribeLink({ className = "" }: { className?: string }) {
   );
 }
 
-function Wordmark() {
+function Wordmark({ logo }: { logo: string | null }) {
   return (
     <Link
       href="/"
       aria-label={`${site.brand}. ${site.show}`}
       className="inline-flex min-h-12 max-w-[calc(100%-4.5rem)] items-center lg:max-w-xl"
     >
-      <span className="flex min-w-0 flex-col gap-1">
-        <span className="font-heading text-xl font-bold leading-none text-white sm:text-3xl">
-          Adventure<span className="inline-block px-[0.04em] text-[1.6em] leading-none text-gold">8</span> Kids Club
-        </span>
-        <span className="text-balance font-heading text-lg font-bold leading-tight text-sky">
-          {site.show}
-        </span>
-      </span>
+      <EditableImage slotKey="/images/logo.png" alt="" layout="inline" buttonClassName="-right-1 -top-1">
+        {logo ? (
+          <img src={logo} alt="" className="h-14 w-auto max-w-[14rem] object-contain sm:h-16" />
+        ) : (
+          <span className="flex min-w-0 flex-col gap-1">
+            <span className="font-heading text-xl font-bold leading-none text-white sm:text-3xl">
+              Adventure<span className="inline-block px-[0.04em] text-[1.6em] leading-none text-gold">8</span> Kids Club
+            </span>
+            <span className="text-balance font-heading text-lg font-bold leading-tight text-sky">
+              {site.show}
+            </span>
+          </span>
+        )}
+      </EditableImage>
     </Link>
   );
 }
 
-export function HeaderClient() {
+export function HeaderClient({ logo }: { logo: string | null }) {
   const pathname = usePathname();
   const menuId = useId();
   const [open, setOpen] = useState(false);
@@ -130,7 +137,7 @@ export function HeaderClient() {
     <>
       <header className="sticky top-0 z-40 border-b border-white/20 bg-navy/90 backdrop-blur-md supports-[backdrop-filter]:bg-navy/75">
         <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-3">
-          <Wordmark />
+          <Wordmark logo={logo} />
           <div className="ml-auto flex items-center gap-3">
             <SubscribeLink className="hidden lg:inline-flex" />
             <button

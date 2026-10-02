@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ImageOverridesProvider } from "@/components/owner/image-overrides";
 import { site } from "@/data/site";
+import { getImageOverrides } from "@/lib/image-overrides";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -58,24 +60,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const overrides = await getImageOverrides();
+  const uploadMode = process.env.BLOB_READ_WRITE_TOKEN ? "token" : "presigned";
+
   return (
     <html
       lang="en"
       className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:inline-flex focus:min-h-12 focus:items-center focus:rounded-full focus:bg-gold focus:px-5 focus:font-heading focus:text-lg focus:text-navy"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" tabIndex={-1} className="flex flex-1 scroll-mt-32 flex-col">
-          {children}
-        </main>
-        <Footer />
+        <ImageOverridesProvider overrides={overrides} uploadMode={uploadMode}>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:inline-flex focus:min-h-12 focus:items-center focus:rounded-full focus:bg-gold focus:px-5 focus:font-heading focus:text-lg focus:text-navy"
+          >
+            Skip to content
+          </a>
+          <Header />
+          <main id="main" tabIndex={-1} className="flex flex-1 scroll-mt-32 flex-col">
+            {children}
+          </main>
+          <Footer />
+        </ImageOverridesProvider>
       </body>
     </html>
   );

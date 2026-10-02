@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { EditableImage } from "@/components/owner/image-overrides";
 import { characters } from "@/data/characters";
 import { inkClass } from "@/lib/contrast";
 import { characterPhoto } from "@/lib/public-images";
@@ -21,22 +22,24 @@ export function MeetTheCrew() {
             <li key={character.id} className="play-float shrink-0 snap-center">
               <Link href={`/characters#${character.id}`} className="flex w-28 flex-col items-center gap-3 sm:w-36">
                 <span
-                  className={`crew-portrait relative flex size-28 items-center justify-center overflow-hidden rounded-full ring-4 ring-white sm:size-36 ${ink}`}
+                  className={`crew-portrait relative flex size-28 items-center justify-center rounded-full ring-4 ring-white sm:size-36 ${ink}`}
                   style={{ backgroundColor: character.color }}
                 >
-                  {photo ? (
-                    <Image
-                      src={photo}
-                      alt=""
-                      fill
-                      sizes="144px"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <span aria-hidden="true" className="font-heading text-4xl sm:text-5xl">
-                      {character.name.slice(0, 1)}
-                    </span>
-                  )}
+                  <EditableImage slotKey={character.image} alt="" clipClassName="rounded-full">
+                    {photo ? (
+                      <Image
+                        src={photo}
+                        alt=""
+                        fill
+                        sizes="144px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <span aria-hidden="true" className="font-heading text-4xl sm:text-5xl">
+                        {character.name.slice(0, 1)}
+                      </span>
+                    )}
+                  </EditableImage>
                 </span>
                 <span className="text-center font-heading text-lg font-bold text-white">
                   {character.name}

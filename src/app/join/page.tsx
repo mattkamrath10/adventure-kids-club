@@ -32,6 +32,7 @@ export default function JoinPage() {
       name: character.name,
       color: character.color,
       image: characterPhoto(character.id, character.name),
+      slotKey: character.image,
     }));
 
   return (

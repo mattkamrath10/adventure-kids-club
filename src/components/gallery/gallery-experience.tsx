@@ -69,12 +69,8 @@ export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
           <ul className="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3">
             {shown.map((photo, index) => (
               <li key={photo.src} className="play-float mb-5 break-inside-avoid">
-                <button
-                  type="button"
-                  className={`gallery-card block w-full text-left focus-visible:outline-white ${
-                    index % 2 === 1 ? "gallery-card-alt" : ""
-                  }`}
-                  onClick={() => setViewer({ items: shown, index })}
+                <div
+                  className={`gallery-card relative ${index % 2 === 1 ? "gallery-card-alt" : ""}`}
                 >
                   <span
                     className={`relative block overflow-hidden rounded-[2rem] ring-4 ring-white ${shapes[index % shapes.length]}`}
@@ -84,11 +80,17 @@ export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       zoom
                     />
-                    <span className="absolute inset-x-3 bottom-3 rounded-2xl bg-navy/85 px-4 py-3 font-heading text-xl text-white">
+                    <span className="pointer-events-none absolute inset-x-3 bottom-3 z-10 rounded-2xl bg-navy/85 px-4 py-3 font-heading text-xl text-white">
                       {photo.caption}
                     </span>
+                    <button
+                      type="button"
+                      className="absolute inset-0 z-0 focus-visible:outline-white"
+                      aria-label={`See ${photo.caption} bigger`}
+                      onClick={() => setViewer({ items: shown, index })}
+                    />
                   </span>
-                </button>
+                </div>
               </li>
             ))}
           </ul>

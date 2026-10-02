@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { EditableImage } from "@/components/owner/image-overrides";
 import { characters } from "@/data/characters";
 import type { GalleryPhoto } from "@/data/gallery";
 
@@ -32,28 +33,30 @@ export function GalleryPicture({
       className={`absolute inset-0 block ${zoom ? "gallery-zoom" : ""}`}
       style={{ backgroundColor: color }}
     >
-      {photo.hasFile ? (
-        <Image
-          src={photo.src}
-          alt={photo.alt}
-          fill
-          priority={priority}
-          sizes={sizes}
-          className={fit === "contain" ? "object-contain" : "object-cover"}
-        />
-      ) : (
-        <>
-          <span className="sr-only">{photo.alt}</span>
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <span className="flex size-28 items-center justify-center rounded-full bg-white font-heading text-6xl text-navy ring-8 ring-white sm:size-40 sm:text-7xl">
-              {photo.characters[0]?.slice(0, 1) ?? "★"}
+      <EditableImage slotKey={photo.src} alt={photo.alt} fit={fit}>
+        {photo.hasFile ? (
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            priority={priority}
+            sizes={sizes}
+            className={fit === "contain" ? "object-contain" : "object-cover"}
+          />
+        ) : (
+          <>
+            <span className="sr-only">{photo.alt}</span>
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <span className="flex size-28 items-center justify-center rounded-full bg-white font-heading text-6xl text-navy ring-8 ring-white sm:size-40 sm:text-7xl">
+                {photo.characters[0]?.slice(0, 1) ?? "★"}
+              </span>
             </span>
-          </span>
-        </>
-      )}
+          </>
+        )}
+      </EditableImage>
     </span>
   );
 }

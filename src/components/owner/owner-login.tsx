@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
-import { useId, useState, type FormEvent } from "react";
+import { useContext, useId, useState, type FormEvent } from "react";
+import { ImageOverrideContext } from "@/components/owner/image-overrides";
 
 const WRONG = "Wrong username or password";
 
 export function OwnerLogin({ loggedIn }: { loggedIn: boolean }) {
   const router = useRouter();
+  const ownerMode = useContext(ImageOverrideContext);
   const usernameId = useId();
   const passwordId = useId();
   const errorId = useId();
@@ -42,6 +44,7 @@ export function OwnerLogin({ loggedIn }: { loggedIn: boolean }) {
 
       setPassword("");
       setOwner(true);
+      ownerMode?.setOwner(true);
       router.refresh();
     } catch {
       setError(WRONG);
@@ -58,6 +61,7 @@ export function OwnerLogin({ loggedIn }: { loggedIn: boolean }) {
     try {
       await fetch("/api/owner/logout", { method: "POST" });
       setOwner(false);
+      ownerMode?.setOwner(false);
       setUsername("");
       setPassword("");
       router.refresh();

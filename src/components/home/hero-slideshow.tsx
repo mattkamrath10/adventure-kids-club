@@ -6,10 +6,11 @@ import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { EditableImage } from "@/components/owner/image-overrides";
 import type { Slide } from "@/data/slides";
 import { site } from "@/data/site";
 
-export function HeroSlideshow({ slides }: { slides: Slide[] }) {
+export function HeroSlideshow({ slides }: { slides: (Slide & { slotKey: string })[] }) {
   const autoplay = useRef(
     Autoplay({
       delay: 5000,
@@ -81,18 +82,24 @@ export function HeroSlideshow({ slides }: { slides: Slide[] }) {
               aria-label={`${index + 1} of ${slides.length}`}
               inert={index !== selected}
             >
-              {slide.image ? (
-                <Image
-                  src={slide.image}
-                  alt=""
-                  fill
-                  priority={index === 0}
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className={`absolute inset-0 ${slide.gradient}`} />
-              )}
+              <EditableImage
+                slotKey={slide.slotKey}
+                alt=""
+                buttonClassName="right-3 top-24 sm:right-8"
+              >
+                {slide.image ? (
+                  <Image
+                    src={slide.image}
+                    alt=""
+                    fill
+                    priority={index === 0}
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className={`absolute inset-0 ${slide.gradient}`} />
+                )}
+              </EditableImage>
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/75 to-transparent" />
               <div className="relative flex h-full flex-col justify-end px-5 pb-28 sm:px-16 sm:pb-32">
                 <h2 className="hero-text-shadow max-w-4xl text-4xl text-white sm:text-6xl lg:text-7xl">
