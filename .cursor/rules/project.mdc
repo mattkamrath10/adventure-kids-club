@@ -1,8 +1,7 @@
 ---
 description: Visual, content, and safety rules for the Tweedles kids' show site
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Tweedles and the Adventure Kids Club
 
 Promotional site for parents and kids (about ages 3–8). Big, bright, bold, playful space-adventure look: huge images, rounded corners, chunky buttons, lots of color.
@@ -51,4 +50,5 @@ Promotional site for parents and kids (about ages 3–8). Big, bright, bold, pla
 ## Content and hosting
 
 - Editable content (characters, videos, social links, gallery list) lives in `src/data/`. Change copy there, not inside components.
-- Static export stays on: `output: "export"` and `images.unoptimized: true` in `next.config.ts`, so the site can be hosted anywhere.
+- Hosted on Vercel as a normal Next.js app. Server code is only for the owner login and image uploads. Public pages stay statically generated.
+- Secrets (owner username, password, session secret, Blob token) only ever come from environment variables. Never hard-code them, never put them in NEXT_PUBLIC_ variables, never commit .env files.

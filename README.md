@@ -33,16 +33,13 @@ The first video is the Latest Episode on the home page. Leave `youtubeId` as `"R
 
 Edit `src/data/characters.ts`. Each character needs an `id`, name, group (`"Adventure Kids"` or `"Tweedles"`), color, look, bio, fun facts, and catchphrase.
 
-Put the picture at `public/images/characters/{id}.png` (the same `id` as in the file). Until that file is there, the site shows the first letter of their name.
+Put their picture in `public/images/characters/`. The filename just needs their name in it, like `Blaze face 1.jpg`. Png and jpg both work. Until a picture is there, the site shows the first letter of their name.
 
 ## Add a gallery picture
 
-1. Drop the file in `public/images/gallery/` (png, jpg, webp, gif, or avif).
-2. Add a line to the list in `src/data/gallery.ts`. `src` must match the file, like `"/images/gallery/your-file.png"`.
+Drop the file in `public/images/gallery/` (png, jpg, webp, gif, or avif). It shows up in the gallery and can fill a home slideshow slide. The caption comes from the filename, so `max-and-cj.png` becomes "Max and CJ" and the Max and CJ filters.
 
-`characters` is who is in the picture, using their names: Max, Blaze, Pip, Luna, CJ, Fizz, Prism, Ember. There is a longer note at the top of that file.
-
-If a home slideshow slide has no picture of its own, the site fills it from this folder, in filename order.
+Edit `src/data/gallery.ts` only when you want your own caption or a custom list of who is in the picture.
 
 ## Add a slideshow slide
 

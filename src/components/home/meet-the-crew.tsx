@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { characters } from "@/data/characters";
 import { inkClass } from "@/lib/contrast";
-import { publicFileExists } from "@/lib/public-images";
+import { characterPhoto } from "@/lib/public-images";
 
 export function MeetTheCrew() {
   const crew = characters.slice(0, 8);
@@ -14,7 +14,7 @@ export function MeetTheCrew() {
       </h2>
       <ul className="mt-8 flex snap-x gap-5 overflow-x-auto px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {crew.map((character) => {
-          const photo = publicFileExists(character.image) ? character.image : undefined;
+          const photo = characterPhoto(character.id, character.name) ?? undefined;
           const ink = inkClass(character.color);
 
           return (

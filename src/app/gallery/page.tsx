@@ -1,15 +1,11 @@
 import { GalleryExperience } from "@/components/gallery/gallery-experience";
-import { gallery } from "@/data/gallery";
 import { starterMetadata } from "@/lib/metadata";
-import { publicFileExists } from "@/lib/public-images";
+import { galleryPhotos } from "@/lib/public-images";
 
 export const metadata = starterMetadata("Gallery", "/gallery");
 
 export default function GalleryPage() {
-  const photos = gallery.map((photo) => ({
-    ...photo,
-    hasFile: publicFileExists(photo.src),
-  }));
+  const photos = galleryPhotos();
 
   return (
     <div className="pb-4">

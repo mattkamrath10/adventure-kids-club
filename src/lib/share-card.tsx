@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
 import { characters } from "@/data/characters";
+import { characterPhoto } from "@/lib/public-images";
 
 export const shareSize = { width: 1200, height: 630 };
 export const shareAlt = "Adventure8 Kids Club | Tweedles and the Adventure Kids Club";
@@ -43,14 +44,22 @@ async function characterPhotos() {
   const photos: { src: string; color: string; name: string }[] = [];
 
   for (const character of characters) {
+    const photo = characterPhoto(character.id, character.name);
+    if (!photo) continue;
+
     try {
       const file = await readFile(
-        path.join(process.cwd(), "public", character.image.replace(/^\//, "")),
+        path.join(process.cwd(), "public", decodeURIComponent(photo.replace(/^\//, ""))),
       );
+      const kind = photo.toLowerCase().endsWith(".png")
+        ? "png"
+        : photo.toLowerCase().endsWith(".webp")
+          ? "webp"
+          : "jpeg";
       photos.push({
         name: character.name,
         color: character.color,
-        src: `data:image/png;base64,${file.toString("base64")}`,
+        src: `data:image/${kind};base64,${file.toString("base64")}`,
       });
     } catch {
       // Portrait is not in public/images/characters yet.

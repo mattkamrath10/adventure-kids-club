@@ -2,7 +2,7 @@ import { AdventureKids } from "@/components/join/adventure-kids";
 import { NewsletterForm } from "@/components/join/newsletter-form";
 import { characters } from "@/data/characters";
 import { starterMetadata } from "@/lib/metadata";
-import { publicFileExists } from "@/lib/public-images";
+import { characterPhoto } from "@/lib/public-images";
 
 export const metadata = starterMetadata("Join the Club", "/join");
 
@@ -31,7 +31,7 @@ export default function JoinPage() {
       id: character.id,
       name: character.name,
       color: character.color,
-      image: publicFileExists(character.image) ? character.image : null,
+      image: characterPhoto(character.id, character.name),
     }));
 
   return (

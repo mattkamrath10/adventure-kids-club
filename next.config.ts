@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
   turbopack: {
     root: path.dirname(fileURLToPath(import.meta.url)),
   },
@@ -14,6 +13,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.ytimg.com",
         pathname: "/vi/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
       },
     ],
   },

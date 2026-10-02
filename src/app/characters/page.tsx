@@ -1,14 +1,14 @@
 import { CrewDirectory } from "@/components/characters/crew-directory";
 import { characters } from "@/data/characters";
 import { starterMetadata } from "@/lib/metadata";
-import { publicFileExists } from "@/lib/public-images";
+import { characterPhoto } from "@/lib/public-images";
 
 export const metadata = starterMetadata("Meet the Crew", "/characters");
 
 export default function CharactersPage() {
   const crew = characters.map((character) => ({
     ...character,
-    photo: publicFileExists(character.image) ? character.image : null,
+    photo: characterPhoto(character.id, character.name),
   }));
 
   return (

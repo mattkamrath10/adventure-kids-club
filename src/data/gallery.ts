@@ -8,9 +8,9 @@ export type GalleryPhoto = {
 };
 
 /**
- * Add a picture:
- * 1. Drop the file in public/images/gallery/ (png, jpg, webp, gif, or avif).
- * 2. Add a line to this list. src must match the file, like "/images/gallery/your-file.png".
+ * Optional. A file in public/images/gallery/ shows up on its own.
+ * Add a line here only when you want your own caption or character filters.
+ * src must match the file, like "/images/gallery/your-file.png".
  */
 export const gallery: GalleryPhoto[] = [
   {

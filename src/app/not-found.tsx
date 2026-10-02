@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { characters } from "@/data/characters";
 import { inkClass } from "@/lib/contrast";
-import { publicFileExists } from "@/lib/public-images";
+import { characterPhoto } from "@/lib/public-images";
 
 export default function NotFound() {
   const cj = characters.find((character) => character.id === "cj");
-  const photo = cj && publicFileExists(cj.image) ? cj.image : null;
+  const photo = cj ? characterPhoto(cj.id, cj.name) : null;
 
   return (
     <div className="flex flex-1 flex-col items-center px-4 py-16 text-center sm:py-24">
