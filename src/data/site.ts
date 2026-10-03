@@ -18,33 +18,28 @@ export const site = {
   socials: [
     {
       name: "YouTube",
-      // TODO: replace with the real YouTube URL
-      href: "https://www.youtube.com/placeholder",
+      href: "https://www.youtube.com/@Adventure8kidsclub",
       description: "Full episodes",
       primary: true,
     },
     {
       name: "Facebook",
-      // TODO: replace with the real Facebook URL
-      href: "https://www.facebook.com/placeholder",
+      href: "https://www.facebook.com/profile.php?id=61595010001812",
       description: "Photos and fun",
     },
     {
       name: "Instagram",
-      // TODO: replace with the real Instagram URL
-      href: "https://www.instagram.com/placeholder",
+      href: "https://www.instagram.com/Adventure8kidsclub",
       description: "Stories and smiles",
     },
     {
       name: "X",
-      // TODO: replace with the real X URL
-      href: "https://x.com/placeholder",
+      href: "https://x.com/Adventure8kidsclub",
       description: "Quick updates",
     },
     {
       name: "Pinterest",
-      // TODO: replace with the real Pinterest URL
-      href: "https://www.pinterest.com/placeholder",
+      href: "https://www.pinterest.com/Adventure8kidsclub",
       description: "Ideas to try",
     },
   ] satisfies SocialLink[],
