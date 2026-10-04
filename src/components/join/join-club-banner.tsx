@@ -1,6 +1,12 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { NewsletterForm } from "./newsletter-form";
 
 export function JoinClubBanner() {
+  const pathname = usePathname();
+  if (pathname === "/join") return null;
+
   return (
     <section aria-labelledby="join-club-banner" className="bg-gold px-4 py-10 text-navy">
       <div className="mx-auto w-full max-w-xl">
