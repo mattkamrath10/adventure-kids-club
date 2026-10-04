@@ -56,12 +56,13 @@ The header shows Adventure8 Kids Club, with the show name underneath. Shared lin
 The Join page and the footer banner send the parent's first name and email to Kit through `POST /api/join`. The form is for parents and guardians only, and the 18+ checkbox is required. The contact page stays on Formspree.
 
 ```bash
+KIT_API_KEY=your-v4-api-key
 KIT_FORM_ID=your-form-id
 ```
 
-Put that line in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change it. Set the same variable in your host's build settings. Do not put the form id in a `NEXT_PUBLIC_` variable.
+Put those lines in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change them. Set the same variables in your host's build settings. Do not put either one in a `NEXT_PUBLIC_` variable.
 
-1. In Kit, open the form. Its subscription URL looks like `https://app.kit.com/forms/YOUR_FORM_ID/subscriptions`.
-2. Use only `YOUR_FORM_ID` as `KIT_FORM_ID`.
+1. In Kit, open Developer settings and create a V4 API key. Use it as `KIT_API_KEY`.
+2. Open the form and copy its id. Use that as `KIT_FORM_ID`.
 
 A successful signup asks the parent to tap the confirm button in their email. A failed signup shows "Something went wrong, please try again." After they confirm, the free coloring pages and behind-the-scenes pictures are on `/members`. That page is not in the menu.
