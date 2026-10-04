@@ -2,23 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import {
-  mailchimpHoneypotName,
-  newsletterAction,
-  newsletterCopy,
-  newsletterFieldNames,
-  newsletterProvider,
-  subscribeToNewsletter,
-} from "@/lib/newsletter";
+import { newsletterAction, newsletterError, newsletterSuccess, subscribeToNewsletter } from "@/lib/newsletter";
 import { Confetti } from "./confetti";
 
 type Status = "idle" | "sending" | "error" | "success";
 
 export function NewsletterForm() {
   const action = newsletterAction();
-  const provider = newsletterProvider(action);
-  const fields = newsletterFieldNames(provider);
-  const honeypotName = provider === "mailchimp" ? mailchimpHoneypotName(action) : null;
 
   const nameId = useId();
   const emailId = useId();
@@ -29,10 +19,9 @@ export function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [grownup, setGrownup] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
-  const [already, setAlready] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>(newsletterCopy.failed);
 
   const alive = useRef(true);
+  const sendingRef = useRef(false);
   const successRef = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
 
@@ -50,68 +39,41 @@ export function NewsletterForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status === "sending") return;
-
-    const form = event.currentTarget;
-    const honeypot = honeypotName ? String(new FormData(form).get(honeypotName) ?? "") : "";
-    if (honeypot) {
-      setAlready(false);
-      setStatus("success");
-      return;
-    }
+    if (sendingRef.current) return;
+    sendingRef.current = true;
 
     setStatus("sending");
-    const result = await subscribeToNewsletter({
+    const ok = await subscribeToNewsletter({
       action,
       email,
       firstName,
     });
+    sendingRef.current = false;
     if (!alive.current) return;
 
-    if (result.status === "navigate") {
-      form.submit();
-      return;
-    }
-
-    if (result.status === "error") {
-      setErrorMessage(result.message);
+    if (!ok) {
       setStatus("error");
       return;
     }
 
-    setAlready(result.already);
+    setFirstName("");
+    setEmail("");
+    setGrownup(false);
     setStatus("success");
-  }
-
-  if (status === "success") {
-    return (
-      <div role="status" className="relative overflow-hidden rounded-3xl bg-lime px-5 py-8 text-center text-navy">
-        <Confetti />
-        <div className="relative z-10">
-          <h3 ref={successRef} tabIndex={-1} className="text-4xl">
-            {already ? newsletterCopy.alreadyTitle : newsletterCopy.successTitle}
-          </h3>
-          <p className="mt-3 text-lg font-bold">
-            {already ? newsletterCopy.alreadyBody : newsletterCopy.successBody}
-          </p>
-        </div>
-      </div>
-    );
   }
 
   const sending = status === "sending";
 
   return (
     <form action={action || undefined} method="post" onSubmit={handleSubmit} className="relative grid gap-4">
-      {honeypotName ? (
-        <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
-          <label>
-            Leave this empty
-            <input type="text" name={honeypotName} tabIndex={-1} autoComplete="off" defaultValue="" />
-          </label>
+      {status === "success" ? (
+        <div role="status" className="relative overflow-hidden rounded-3xl bg-lime px-5 py-8 text-center text-navy">
+          <Confetti />
+          <h3 ref={successRef} tabIndex={-1} className="relative z-10 text-4xl">
+            {newsletterSuccess}
+          </h3>
         </div>
       ) : null}
-      {provider === "buttondown" ? <input type="hidden" name="embed" value="1" /> : null}
 
       <label htmlFor={nameId} className="grid gap-2 font-heading text-lg">
         <span>
@@ -119,7 +81,7 @@ export function NewsletterForm() {
         </span>
         <input
           id={nameId}
-          name={fields.firstName ?? undefined}
+          name="first_name"
           type="text"
           value={firstName}
           onChange={(event) => setFirstName(event.target.value)}
@@ -133,7 +95,7 @@ export function NewsletterForm() {
         Parent&apos;s email
         <input
           id={emailId}
-          name={fields.email}
+          name="email"
           type="email"
           required
           value={email}
@@ -168,7 +130,7 @@ export function NewsletterForm() {
           tabIndex={-1}
           className="rounded-2xl bg-navy px-4 py-3 text-lg font-bold text-white"
         >
-          {errorMessage}
+          {newsletterError}
         </p>
       ) : null}
 

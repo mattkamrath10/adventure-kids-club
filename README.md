@@ -53,39 +53,15 @@ The header shows Adventure8 Kids Club, with the show name underneath. Shared lin
 
 ## Environment variables
 
-The Join page and the footer banner post straight to your email provider. There is no server and no API route. The form is for parents and guardians only.
+The Join page and the footer banner post the parent's first name and email to Formspree. There is no server and no API route. The form is for parents and guardians only, and the 18+ checkbox is required.
 
 ```bash
-NEXT_PUBLIC_NEWSLETTER_ACTION=https://...
+NEXT_PUBLIC_NEWSLETTER_ACTION=https://formspree.io/f/your-form-id
 ```
 
-Put that line in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change it. Set the same variable in your host's build settings before `npm run build`. The static export bakes the URL in at build time.
+Put that line in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change it. Set the same variable in your host's build settings before `npm run build`. The site bakes the URL in at build time.
 
-Paste the URL with normal `&` characters. If the embed code shows `&amp;`, use `&` instead.
-
-### Mailchimp
-
-1. Open your audience, then **Signup forms**, then **Embedded forms**.
-2. Copy the form `action` URL. It looks like `https://xxxx.us1.list-manage.com/subscribe/post?u=YOUR_USER&id=YOUR_LIST`.
-3. Use that whole URL as `NEXT_PUBLIC_NEWSLETTER_ACTION`.
-
-The form sends the parent's email as `EMAIL` and the optional first name as `FNAME`.
-
-### Kit (ConvertKit)
-
-1. Open the form, choose **Embed**, then **HTML**.
-2. Copy the `action` URL from the `<form>` tag. It looks like `https://app.kit.com/forms/YOUR_FORM_ID/subscriptions`. Older accounts use `https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions`.
-3. Use that URL as `NEXT_PUBLIC_NEWSLETTER_ACTION`.
-
-The form sends the parent's email as `email_address` and the optional first name as `first_name`.
-
-### Buttondown
-
-1. Copy the embed form action from Buttondown's subscribe form docs. It looks like `https://buttondown.com/api/emails/embed-subscribe/YOUR_USERNAME`.
+1. In Formspree, open the form and copy its endpoint. It looks like `https://formspree.io/f/your-form-id`.
 2. Use that URL as `NEXT_PUBLIC_NEWSLETTER_ACTION`.
 
-Buttondown's embed form stores the email (`email`). The optional first name stays on our form and is not sent, because their embed does not ask for it. If Buttondown needs the parent to finish a check on their page, the form opens that page.
-
-### Any other provider
-
-Use the provider's embedded form POST URL. The form sends `email` and, when the parent filled it in, `first_name`.
+The form sends `first_name` and `email` with `Accept: application/json`. A successful signup shows "You're in! Welcome to the club." and clears the fields. A failed signup shows "Something went wrong, please try again."

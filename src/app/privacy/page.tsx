@@ -48,9 +48,8 @@ export default function PrivacyPage() {
             a box that says you are a parent or guardian.
           </p>
           <p className="mt-3">
-            That form goes to our email provider, so they can send notes about new episodes,
-            coloring pages, and behind-the-scenes fun. We use it for those family notes, not for
-            ads.
+            That form goes to Formspree, which delivers it to us. We use it for notes about new
+            episodes, coloring pages, and behind-the-scenes fun, not for ads.
           </p>
         </section>
 
