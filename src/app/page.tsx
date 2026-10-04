@@ -5,6 +5,7 @@ import { LatestEpisode } from "@/components/home/latest-episode";
 import { MeetTheCrew } from "@/components/home/meet-the-crew";
 import { WhereToWatch } from "@/components/home/where-to-watch";
 import { slides } from "@/data/slides";
+import { getLatestVideo } from "@/lib/latestVideo";
 import { galleryImagePaths, publicFileExists } from "@/lib/public-images";
 
 export const metadata: Metadata = {
@@ -22,13 +23,15 @@ function heroSlides() {
   });
 }
 
-export default function Home() {
+export default async function Home() {
+  const latestVideo = await getLatestVideo();
+
   return (
     <>
       <HeroSlideshow slides={heroSlides()} />
       <WhereToWatch />
       <MeetTheCrew />
-      <LatestEpisode />
+      <LatestEpisode video={latestVideo} />
       <JoinBand />
     </>
   );

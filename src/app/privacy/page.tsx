@@ -64,9 +64,9 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-3xl text-gold sm:text-4xl">Videos load when you press play</h2>
           <p className="mt-3">
-            Episode pictures stay on this site until someone presses play. The video then loads
-            from youtube-nocookie.com, YouTube&apos;s privacy-enhanced player. Nothing from YouTube
-            loads before that click.
+            The latest episode on the home page plays in youtube-nocookie.com, YouTube&apos;s
+            privacy-enhanced player. On the Watch page, episode pictures stay on this site until
+            someone presses play, and the video then loads from youtube-nocookie.com.
           </p>
         </section>
 

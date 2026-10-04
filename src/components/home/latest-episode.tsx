@@ -1,11 +1,7 @@
 import Link from "next/link";
 import { Play } from "lucide-react";
-import { LiteYouTube } from "@/components/watch/lite-youtube";
-import { visibleVideos } from "@/data/videos";
 
-export function LatestEpisode() {
-  const video = visibleVideos()[0];
-
+export function LatestEpisode({ video }: { video: { id: string; title: string } | null }) {
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:py-16" aria-labelledby="latest-episode">
       <h2 id="latest-episode" className="text-center text-4xl text-white sm:text-5xl">
@@ -13,13 +9,18 @@ export function LatestEpisode() {
       </h2>
       <div className="play-float mx-auto mt-8 max-w-3xl">
         {video ? (
-          <>
-            <h3 className="mb-4 text-center text-2xl text-gold sm:text-3xl">{video.title}</h3>
-            <LiteYouTube
-              video={video}
-              className="rounded-[2rem] border-4 border-white"
-            />
-          </>
+          <div className="mx-auto w-full max-w-[360px]">
+            <div className="aspect-[9/16] overflow-hidden rounded-[2rem] border-8 border-sky bg-navy">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.id)}`}
+                title={video.title}
+                className="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <h3 className="mt-4 text-center text-2xl text-gold sm:text-3xl">{video.title}</h3>
+          </div>
         ) : (
           <div className="flex aspect-video w-full flex-col items-center justify-center rounded-[2rem] border-8 border-sky bg-navy px-6 text-center">
             <span className="flex size-20 items-center justify-center rounded-full bg-sky text-navy">
