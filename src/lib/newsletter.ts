@@ -1,7 +1,5 @@
 /** Join the club posts to /api/join, which subscribes the parent on Kit. */
 
-export const newsletterSuccess =
-  "Almost there! Check your email and tap the confirm button. That unlocks your free coloring pages and behind-the-scenes fun.";
 export const newsletterError = "Something went wrong, please try again.";
 
 export async function subscribeToNewsletter(input: {
