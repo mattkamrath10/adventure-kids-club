@@ -48,8 +48,9 @@ export default function PrivacyPage() {
             a box that says you are a parent or guardian.
           </p>
           <p className="mt-3">
-            That form goes to Formspree, which delivers it to us. We use it for notes about new
-            episodes, coloring pages, and behind-the-scenes fun, not for ads.
+            That form goes to Kit, which emails you a confirm button. After you tap it, we can send
+            notes about new episodes, coloring pages, and behind-the-scenes fun. We don&apos;t use
+            it for ads.
           </p>
         </section>
 
@@ -86,8 +87,7 @@ export default function PrivacyPage() {
           <h2 className="text-3xl text-gold sm:text-4xl">Ask us to delete your info</h2>
           <p className="mt-3">
             Want your email or a message removed? Write to us and tell us the email address and
-            what to delete. We&apos;ll take it off our list and ask our email provider and Formspree
-            to delete it too.
+            what to delete.             We&apos;ll take it off our list and ask Kit and Formspree to delete it too.
           </p>
           <Link
             href="/contact"

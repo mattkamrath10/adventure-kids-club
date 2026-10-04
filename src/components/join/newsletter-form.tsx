@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { newsletterAction, newsletterError, newsletterSuccess, subscribeToNewsletter } from "@/lib/newsletter";
+import { newsletterError, newsletterSuccess, subscribeToNewsletter } from "@/lib/newsletter";
 import { Confetti } from "./confetti";
 
 type Status = "idle" | "sending" | "error" | "success";
 
 export function NewsletterForm() {
-  const action = newsletterAction();
-
   const nameId = useId();
   const emailId = useId();
   const grownupId = useId();
@@ -22,7 +20,7 @@ export function NewsletterForm() {
 
   const alive = useRef(true);
   const sendingRef = useRef(false);
-  const successRef = useRef<HTMLHeadingElement>(null);
+  const successRef = useRef<HTMLParagraphElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -44,9 +42,9 @@ export function NewsletterForm() {
 
     setStatus("sending");
     const ok = await subscribeToNewsletter({
-      action,
       email,
       firstName,
+      isAdult: grownup,
     });
     sendingRef.current = false;
     if (!alive.current) return;
@@ -65,13 +63,13 @@ export function NewsletterForm() {
   const sending = status === "sending";
 
   return (
-    <form action={action || undefined} method="post" onSubmit={handleSubmit} className="relative grid gap-4">
+    <form method="post" onSubmit={handleSubmit} className="relative grid gap-4">
       {status === "success" ? (
         <div role="status" className="relative overflow-hidden rounded-3xl bg-lime px-5 py-8 text-center text-navy">
           <Confetti />
-          <h3 ref={successRef} tabIndex={-1} className="relative z-10 text-4xl">
+          <p ref={successRef} tabIndex={-1} className="relative z-10 font-heading text-2xl font-bold sm:text-3xl">
             {newsletterSuccess}
-          </h3>
+          </p>
         </div>
       ) : null}
 

@@ -53,15 +53,15 @@ The header shows Adventure8 Kids Club, with the show name underneath. Shared lin
 
 ## Environment variables
 
-The Join page and the footer banner post the parent's first name and email to Formspree. There is no server and no API route. The form is for parents and guardians only, and the 18+ checkbox is required.
+The Join page and the footer banner send the parent's first name and email to Kit through `POST /api/join`. The form is for parents and guardians only, and the 18+ checkbox is required. The contact page stays on Formspree.
 
 ```bash
-NEXT_PUBLIC_NEWSLETTER_ACTION=https://formspree.io/f/your-form-id
+KIT_FORM_ID=your-form-id
 ```
 
-Put that line in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change it. Set the same variable in your host's build settings before `npm run build`. The site bakes the URL in at build time.
+Put that line in `.env.local` for local work (that file stays on your computer). Restart `npm run dev` after you change it. Set the same variable in your host's build settings. Do not put the form id in a `NEXT_PUBLIC_` variable.
 
-1. In Formspree, open the form and copy its endpoint. It looks like `https://formspree.io/f/your-form-id`.
-2. Use that URL as `NEXT_PUBLIC_NEWSLETTER_ACTION`.
+1. In Kit, open the form. Its subscription URL looks like `https://app.kit.com/forms/YOUR_FORM_ID/subscriptions`.
+2. Use only `YOUR_FORM_ID` as `KIT_FORM_ID`.
 
-The form sends `first_name` and `email` with `Accept: application/json`. A successful signup shows "You're in! Welcome to the club." and clears the fields. A failed signup shows "Something went wrong, please try again."
+A successful signup asks the parent to tap the confirm button in their email. A failed signup shows "Something went wrong, please try again." After they confirm, the free coloring pages and behind-the-scenes pictures are on `/members`. That page is not in the menu.

@@ -32,6 +32,13 @@ export function slotKeyFromPathname(pathname: string) {
   const cut = rest.lastIndexOf("/");
   if (cut <= 0) return null;
   const key = rest.slice(0, cut);
-  if (key.startsWith("slides/") || key.startsWith("gallery/")) return key;
+  if (
+    key.startsWith("slides/") ||
+    key.startsWith("gallery/") ||
+    key.startsWith("coloring/") ||
+    key.startsWith("bts/")
+  ) {
+    return key;
+  }
   return `/${key}`;
 }

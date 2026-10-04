@@ -1,40 +1,26 @@
-/**
- * The join form posts the parent's first name and email to Formspree.
- * Set NEXT_PUBLIC_NEWSLETTER_ACTION to the form URL, like https://formspree.io/f/your-id.
- */
+/** Join the club posts to /api/join, which subscribes the parent on Kit. */
 
-export const newsletterSuccess = "You're in! Welcome to the club.";
+export const newsletterSuccess =
+  "Almost there! Check your email and tap the confirm button. That unlocks your free coloring pages and behind-the-scenes fun.";
 export const newsletterError = "Something went wrong, please try again.";
 
-export function newsletterAction() {
-  const value = process.env.NEXT_PUBLIC_NEWSLETTER_ACTION?.trim() ?? "";
-  if (!value) return "";
-
-  try {
-    const url = new URL(value);
-    if (url.protocol !== "https:") return "";
-    return url.toString();
-  } catch {
-    return "";
-  }
-}
-
 export async function subscribeToNewsletter(input: {
-  action: string;
   email: string;
   firstName: string;
+  isAdult: boolean;
 }): Promise<boolean> {
-  if (!input.action) return false;
-
-  const body = new FormData();
-  body.set("first_name", input.firstName.trim());
-  body.set("email", input.email.trim());
-
   try {
-    const response = await fetch(input.action, {
+    const response = await fetch("/api/join", {
       method: "POST",
-      body,
-      headers: { Accept: "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        firstName: input.firstName.trim(),
+        email: input.email.trim(),
+        isAdult: input.isAdult,
+      }),
     });
     return response.ok;
   } catch {

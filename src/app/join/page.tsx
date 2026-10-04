@@ -49,6 +49,10 @@ export default function JoinPage() {
           ))}
         </ul>
 
+        <p className="mt-8 text-center text-lg font-bold text-white sm:text-xl">
+          It&apos;s 100% free. After you confirm your email, you&apos;ll get a link to the members page.
+        </p>
+
         <div className="mx-auto mt-10 max-w-xl rounded-[2rem] bg-white px-5 py-8 text-navy sm:px-8">
           <h2 className="text-center text-4xl">For grown-ups only</h2>
           <p className="mt-3 text-center text-lg font-bold">
