@@ -32,7 +32,7 @@ export const videos: Video[] = [
     id: "blast-off",
     title: "Blast Off!",
     description:
-      "Max leads the club to the launch pad, and the Tweedles hitch a ride.",
+      "Blaze leads the club to the launch pad, and the Tweedles hitch a ride.",
     youtubeId: "REPLACE_ME",
     episode: 1,
   },
