@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdventureKids } from "@/components/join/adventure-kids";
 import { NewsletterForm } from "@/components/join/newsletter-form";
 import { characters } from "@/data/characters";
@@ -61,6 +62,14 @@ export default function JoinPage() {
           <div className="mt-6">
             <NewsletterForm />
           </div>
+          <p className="mt-4 text-center">
+            <Link
+              href="/members"
+              className="inline-flex min-h-12 items-center font-heading text-lg text-navy underline decoration-2 underline-offset-4"
+            >
+              Already a member? Go to the members page
+            </Link>
+          </p>
         </div>
       </div>
     </div>

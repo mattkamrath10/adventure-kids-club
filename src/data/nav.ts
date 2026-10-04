@@ -10,4 +10,5 @@ export const navLinks = [
 export const footerLinks = [
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/contact", label: "Contact" },
+  { href: "/members", label: "Members" },
 ] as const;
