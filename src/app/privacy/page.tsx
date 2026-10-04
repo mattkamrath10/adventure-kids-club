@@ -78,8 +78,8 @@ export default function PrivacyPage() {
             cookies. We don&apos;t follow you around the web.
           </p>
           <p className="mt-3">
-            Buttons for YouTube, Facebook, Instagram, X, and Pinterest open those sites in a new
-            tab. Look for {site.handle}. Those sites have their own privacy rules.
+            Buttons for YouTube, Facebook, and Instagram open those sites in a new tab. Look for{" "}
+            {site.handle}. Those sites have their own privacy rules.
           </p>
         </section>
 

@@ -32,15 +32,5 @@ export const site = {
       href: "https://www.instagram.com/adventure8kidsclub?stkn=OGdwanBiOHk4ZHM2",
       description: "Stories and smiles",
     },
-    {
-      name: "X",
-      href: "https://x.com/Adventure8kidsclub",
-      description: "Quick updates",
-    },
-    {
-      name: "Pinterest",
-      href: "https://www.pinterest.com/Adventure8kidsclub",
-      description: "Ideas to try",
-    },
   ] satisfies SocialLink[],
 };

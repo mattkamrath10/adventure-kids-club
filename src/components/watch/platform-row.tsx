@@ -7,9 +7,9 @@ export function PlatformRow() {
   );
 
   return (
-    <ul className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+    <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
       {socials.map((social) => (
-        <li key={social.name} className={`play-float min-w-0 ${social.primary ? "col-span-2" : ""}`}>
+        <li key={social.name} className="play-float min-w-0">
           <a
             href={social.href}
             target="_blank"

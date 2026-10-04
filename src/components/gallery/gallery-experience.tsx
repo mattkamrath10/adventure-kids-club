@@ -10,7 +10,7 @@ import { GallerySlideshow } from "@/components/gallery/gallery-slideshow";
 
 const shapes = ["aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[5/4]"];
 
-const moreNames = ["Instagram", "Pinterest"];
+const moreNames = ["Instagram"];
 
 export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
   const [filter, setFilter] = useState("All");
@@ -98,7 +98,7 @@ export function GalleryExperience({ photos }: { photos: GalleryItem[] }) {
 
         <div className="mt-12 text-center">
           <p className="font-heading text-3xl text-white sm:text-4xl">
-            See more pictures on Instagram and Pinterest at {site.handle}!
+            See more pictures on Instagram at {site.handle}!
           </p>
           <ul className="mt-6 flex flex-wrap justify-center gap-3">
             {more.map((social) => (
