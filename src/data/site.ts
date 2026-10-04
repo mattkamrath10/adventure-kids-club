@@ -29,7 +29,7 @@ export const site = {
     },
     {
       name: "Instagram",
-      href: "https://www.instagram.com/Adventure8kidsclub",
+      href: "https://www.instagram.com/adventure8kidsclub?stkn=OGdwanBiOHk4ZHM2",
       description: "Stories and smiles",
     },
     {
